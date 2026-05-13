@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- Content Header -->
+<section class="content-header">
+
+    <div class="container-fluid">
+
+        <div class="row mb-2">
+
+            <div class="col-sm-6">
+                <h1>Dashboard</h1>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Main Content -->
+<section class="content">
+
+    <div class="container-fluid">
+
+        <!-- Small Boxes -->
+        <div class="row">
+
+            <div class="col-lg-3 col-6">
+
+                <div class="small-box bg-info">
+
+                    <div class="inner">
+                        <h3>248</h3>
+                        <p>Total Employees</p>
+                    </div>
+
+                    <div class="icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-6">
+
+                <div class="small-box bg-success">
+
+                    <div class="inner">
+                        <h3>234</h3>
+                        <p>Present Today</p>
+                    </div>
+
+                    <div class="icon">
+                        <i class="fas fa-user-check"></i>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-6">
+
+                <div class="small-box bg-warning">
+
+                    <div class="inner">
+                        <h3>14</h3>
+                        <p>On Leave</p>
+                    </div>
+
+                    <div class="icon">
+                        <i class="fas fa-calendar"></i>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-6">
+
+                <div class="small-box bg-danger">
+
+                    <div class="inner">
+                        <h3>95%</h3>
+                        <p>Attendance</p>
+                    </div>
+
+                    <div class="icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Charts -->
+        <div class="row">
+
+            <div class="col-md-6">
+
+                <div class="card">
+
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            Weekly Attendance
+                        </h3>
+                    </div>
+
+                    <div class="card-body">
+                        <canvas id="barChart"></canvas>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-6">
+
+                <div class="card">
+
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            Attendance Trend
+                        </h3>
+                    </div>
+
+                    <div class="card-body">
+                        <canvas id="lineChart"></canvas>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Chart JS -->
+<script>
+
+    // Bar Chart
+
+    new Chart(document.getElementById('barChart'), {
+
+        type: 'bar',
+
+        data: {
+
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+
+            datasets: [
+                {
+                    label: 'Present',
+                    backgroundColor: '#17a2b8',
+                    data: [235, 238, 234, 240, 234]
+                }
+            ]
+        }
+
+    });
+
+    // Line Chart
+
+    new Chart(document.getElementById('lineChart'), {
+
+        type: 'line',
+
+        data: {
+
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+
+            datasets: [
+                {
+                    label: 'Attendance',
+                    borderColor: '#dc3545',
+                    data: [94, 93, 95, 94, 95],
+                    fill: false
+                }
+            ]
+        }
+
+    });
+
+</script>
+
+{% endblock %}

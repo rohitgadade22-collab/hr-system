@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- Content Header -->
+<section class="content-header">
+    <div class="container-fluid">
+
+        <div class="row mb-3">
+            <div class="col-sm-6">
+                <h1>Employee Registration</h1>
+                <p class="text-muted">
+                    Add new employees to the system
+                </p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- Main Content -->
+<section class="content">
+
+    <div class="container-fluid">
+
+        <div class="card">
+
+            <div class="card-header">
+                <h3 class="card-title">
+                    New Employee Details
+                </h3>
+            </div>
+
+            <div class="card-body">
+
+                <form method="POST">
+
+                    <!-- First Name / Last Name -->
+                    <div class="row">
+
+                        <div class="col-md-6">
+
+                            <div class="form-group">
+                                <label>
+                                    <i class="fas fa-user mr-1"></i>
+                                    First Name
+                                </label>
+
+                                <input type="text"
+                                       name="first_name"
+                                       class="form-control"
+                                       placeholder="John">
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <div class="form-group">
+                                <label>Last Name</label>
+
+                                <input type="text"
+                                       name="last_name"
+                                       class="form-control"
+                                       placeholder="Doe">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Email -->
+                    <div class="form-group">
+
+                        <label>
+                            <i class="fas fa-envelope mr-1"></i>
+                            Email Address
+                        </label>
+
+                        <input type="email"
+                               name="email"
+                               class="form-control"
+                               placeholder="john.doe@company.com">
+
+                    </div>
+
+                    <!-- Phone -->
+                    <div class="form-group">
+
+                        <label>
+                            <i class="fas fa-phone mr-1"></i>
+                            Phone Number
+                        </label>
+
+                        <input type="text"
+                               name="phone"
+                               class="form-control"
+                               placeholder="+1 (555) 123-4567">
+
+                    </div>
+
+                    <!-- Department / Position -->
+                    <div class="row">
+
+                        <div class="col-md-6">
+
+                            <div class="form-group">
+
+                                <label>
+                                    <i class="fas fa-briefcase mr-1"></i>
+                                    Department
+                                </label>
+
+                                <select class="form-control"
+                                        name="department">
+
+                                    <option>Select Department</option>
+                                    <option>HR</option>
+                                    <option>IT</option>
+                                    <option>Finance</option>
+                                    <option>Operations</option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <div class="form-group">
+
+                                <label>Position</label>
+
+                                <input type="text"
+                                       name="position"
+                                       class="form-control"
+                                       placeholder="Software Engineer">
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Joining Date -->
+                    <div class="form-group">
+
+                        <label>
+                            <i class="fas fa-calendar mr-1"></i>
+                            Joining Date
+                        </label>
+
+                        <input type="date"
+                               name="joining_date"
+                               class="form-control">
+
+                    </div>
+
+                    <!-- Address -->
+                    <div class="form-group">
+
+                        <label>
+                            <i class="fas fa-map-marker-alt mr-1"></i>
+                            Address
+                        </label>
+
+                        <textarea class="form-control"
+                                  rows="4"
+                                  name="address"
+                                  placeholder="123 Main St, City, State 12345"></textarea>
+
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit"
+                            class="btn btn-primary btn-block">
+
+                        Register Employee
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
