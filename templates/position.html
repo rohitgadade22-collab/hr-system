@@ -1,0 +1,191 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="content-header">
+
+    <div class="container-fluid">
+
+        <div class="d-flex justify-content-between align-items-center">
+
+            <div>
+
+                <h1>Position Management</h1>
+
+                <p class="text-muted">
+                    Add and manage positions
+                </p>
+
+            </div>
+
+            <button class="btn btn-primary btn-sm"
+                    data-toggle="modal"
+                    data-target="#positionModal">
+
+                <i class="fas fa-plus mr-1"></i>
+                Add Position
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="content">
+
+    <div class="container-fluid">
+
+        <div class="card">
+
+            <div class="card-body table-responsive">
+
+                <table class="table table-bordered table-hover">
+
+                    <thead class="bg-light">
+
+                        <tr>
+
+                            <th>#</th>
+                            <th>Department</th>
+                            <th>Position Name</th>
+                            <th>Created Date</th>
+                            <th>Actions</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>1</td>
+                            <td>IT</td>
+                            <td>Software Engineer</td>
+                            <td>15-05-2026</td>
+
+                            <td>
+
+                                <button class="btn btn-primary btn-sm">
+
+                                    <i class="fas fa-edit"></i>
+
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Modal -->
+
+<div class="modal fade"
+     id="positionModal">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <form method="POST">
+
+                <div class="modal-header">
+
+                    <h4 class="modal-title">
+                        Add Position
+                    </h4>
+
+                    <button type="button"
+                            class="close"
+                            data-dismiss="modal">
+
+                        &times;
+
+                    </button>
+
+                </div>
+
+                <div class="modal-body">
+
+                    <!-- Department -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Department
+                        </label>
+
+                        <select class="form-control"
+                                name="department"
+                                required>
+
+                            <option value="">
+                                Select Department
+                            </option>
+
+                            <option>IT</option>
+                            <option>HR</option>
+                            <option>Finance</option>
+
+                        </select>
+
+                    </div>
+
+                    <!-- Position -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Position Name
+                        </label>
+
+                        <input type="text"
+                               name="position_name"
+                               class="form-control"
+                               placeholder="Enter Position"
+                               required>
+
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <button type="button"
+                            class="btn btn-secondary btn-sm"
+                            data-dismiss="modal">
+
+                        Cancel
+
+                    </button>
+
+                    <button type="submit"
+                            class="btn btn-primary btn-sm">
+
+                        Save Position
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

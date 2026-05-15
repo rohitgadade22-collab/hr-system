@@ -260,6 +260,64 @@
                         </a>
 
                     </li>
+                    <!-- Admin -->
+<li class="nav-item has-treeview
+{% if active_page in ['department','position'] %}
+menu-open
+{% endif %}">
+
+    <a href="#"
+       class="nav-link
+       {% if active_page in ['department','position'] %}
+       active
+       {% endif %}">
+
+        <i class="nav-icon fas fa-user-shield"></i>
+
+        <p>
+            Admin
+            <i class="right fas fa-angle-left"></i>
+        </p>
+
+    </a>
+
+    <ul class="nav nav-treeview">
+
+        <li class="nav-item">
+
+            <a href="{{ url_for('department') }}"
+               class="nav-link
+               {% if active_page == 'department' %}
+               active
+               {% endif %}">
+
+                <i class="far fa-circle nav-icon"></i>
+
+                <p>Departments</p>
+
+            </a>
+
+        </li>
+
+        <li class="nav-item">
+
+            <a href="{{ url_for('position') }}"
+               class="nav-link
+               {% if active_page == 'position' %}
+               active
+               {% endif %}">
+
+                <i class="far fa-circle nav-icon"></i>
+
+                <p>Positions</p>
+
+            </a>
+
+        </li>
+
+    </ul>
+
+</li>
 
                 </ul>
 
