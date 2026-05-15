@@ -50,35 +50,45 @@
                             <th>#</th>
                             <th>Department</th>
                             <th>Position Name</th>
-                            <th>Created Date</th>
                             <th>Actions</th>
 
                         </tr>
 
                     </thead>
 
-                    <tbody>
+<tbody>
 
-                        <tr>
+{% for item in positions %}
 
-                            <td>1</td>
-                            <td>IT</td>
-                            <td>Software Engineer</td>
-                            <td>15-05-2026</td>
+<tr>
 
-                            <td>
+    <td>
+        {{ item.Id }}
+    </td>
 
-                                <button class="btn btn-primary btn-sm">
+    <td>
+        {{ item.Department }}
+    </td>
 
-                                    <i class="fas fa-edit"></i>
+    <td>
+        {{ item.Position }}
+    </td>
 
-                                </button>
+    <td>
 
-                            </td>
+        <button class="btn btn-primary btn-sm">
 
-                        </tr>
+            <i class="fas fa-edit"></i>
 
-                    </tbody>
+        </button>
+
+    </td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
 
                 </table>
 
@@ -127,19 +137,25 @@
                             Department
                         </label>
 
-                        <select class="form-control"
-                                name="department"
-                                required>
+<select class="form-control"
+        name="department"
+        required>
 
-                            <option value="">
-                                Select Department
-                            </option>
+    <option value="">
+        Select Department
+    </option>
 
-                            <option>IT</option>
-                            <option>HR</option>
-                            <option>Finance</option>
+    {% for item in departments %}
 
-                        </select>
+    <option value="{{ item.Id }}">
+
+        {{ item.Department }}
+
+    </option>
+
+    {% endfor %}
+
+</select>
 
                     </div>
 

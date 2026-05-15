@@ -286,214 +286,73 @@
 
                 </thead>
 
-                <tbody>
+<tbody>
 
-                    <tr>
+{% for item in employees %}
 
-                        <td>1</td>
+<tr>
 
-                        <td class="employee-name">
-                            John Doe
-                        </td>
+    <td>
+        {{ item.Id }}
+    </td>
 
-                        <td>john@company.com</td>
+    <td class="employee-name">
+        {{ item.FirstName }} {{ item.LastName }}
+    </td>
 
-                        <td>+1 (555) 123-4567</td>
+    <td>
+        {{ item.Email }}
+    </td>
 
-                        <td>
-                            <span class="badge-dept">
-                                Engineering
-                            </span>
-                        </td>
+    <td>
+        {{ item.Phone }}
+    </td>
 
-                        <td>Senior Developer</td>
+    <td>
 
-                        <td>15/01/2023</td>
+        <span class="badge-dept">
 
-                        <td>
-                            <span class="status-active">
-                                Active
-                            </span>
-                        </td>
+            {{ item.Department }}
 
-                        <td>
+        </span>
 
-                            <button class="btn btn-edit">
+    </td>
 
-                                <i class="fas fa-edit mr-1"></i>
-                                Edit
+    <td>
+        {{ item.Position }}
+    </td>
 
-                            </button>
+    <td>
+        {{ item.JoiningDate }}
+    </td>
 
-                        </td>
+    <td>
 
-                    </tr>
+        <span class="status-active">
 
-                    <tr>
+            Active
 
-                        <td>2</td>
+        </span>
 
-                        <td class="employee-name">
-                            Jane Smith
-                        </td>
+    </td>
 
-                        <td>jane@company.com</td>
+    <td>
 
-                        <td>+1 (555) 234-5678</td>
+        <button class="btn btn-edit">
 
-                        <td>
-                            <span class="badge-dept">
-                                Marketing
-                            </span>
-                        </td>
+            <i class="fas fa-edit mr-1"></i>
 
-                        <td>Marketing Manager</td>
+            Edit
 
-                        <td>20/03/2023</td>
+        </button>
 
-                        <td>
-                            <span class="status-active">
-                                Active
-                            </span>
-                        </td>
+    </td>
 
-                        <td>
+</tr>
 
-                            <button class="btn btn-edit">
+{% endfor %}
 
-                                <i class="fas fa-edit mr-1"></i>
-                                Edit
-
-                            </button>
-
-                        </td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td>3</td>
-
-                        <td class="employee-name">
-                            Mike Johnson
-                        </td>
-
-                        <td>mike@company.com</td>
-
-                        <td>+1 (555) 345-6789</td>
-
-                        <td>
-                            <span class="badge-dept">
-                                Sales
-                            </span>
-                        </td>
-
-                        <td>Sales Executive</td>
-
-                        <td>10/05/2023</td>
-
-                        <td>
-                            <span class="status-active">
-                                Active
-                            </span>
-                        </td>
-
-                        <td>
-
-                            <button class="btn btn-edit">
-
-                                <i class="fas fa-edit mr-1"></i>
-                                Edit
-
-                            </button>
-
-                        </td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td>4</td>
-
-                        <td class="employee-name">
-                            Sarah Williams
-                        </td>
-
-                        <td>sarah@company.com</td>
-
-                        <td>+1 (555) 456-7890</td>
-
-                        <td>
-                            <span class="badge-dept">
-                                HR
-                            </span>
-                        </td>
-
-                        <td>HR Specialist</td>
-
-                        <td>28/02/2023</td>
-
-                        <td>
-                            <span class="status-inactive">
-                                Inactive
-                            </span>
-                        </td>
-
-                        <td>
-
-                            <button class="btn btn-edit">
-
-                                <i class="fas fa-edit mr-1"></i>
-                                Edit
-
-                            </button>
-
-                        </td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td>5</td>
-
-                        <td class="employee-name">
-                            Tom Brown
-                        </td>
-
-                        <td>tom@company.com</td>
-
-                        <td>+1 (555) 567-8901</td>
-
-                        <td>
-                            <span class="badge-dept">
-                                Engineering
-                            </span>
-                        </td>
-
-                        <td>Junior Developer</td>
-
-                        <td>05/01/2024</td>
-
-                        <td>
-                            <span class="status-active">
-                                Active
-                            </span>
-                        </td>
-
-                        <td>
-
-                            <button class="btn btn-edit">
-
-                                <i class="fas fa-edit mr-1"></i>
-                                Edit
-
-                            </button>
-
-                        </td>
-
-                    </tr>
-
-                </tbody>
+</tbody>
 
             </table>
 
@@ -613,43 +472,61 @@
 
                         <div class="col-md-6">
 
-                            <div class="form-group">
+<div class="form-group">
 
-                                <label class="form-label">
-                                    Department
-                                </label>
+    <label class="form-label">
+        Department
+    </label>
 
-                                <select class="form-control"
-                                        name="department">
+<select class="form-control"
+        name="department"
+        id="department"
+        required>
 
-                                    <option>Select Department</option>
-                                    <option>HR</option>
-                                    <option>IT</option>
-                                    <option>Finance</option>
-                                    <option>Operations</option>
+    <option value="">
+        Select Department
+    </option>
 
-                                </select>
+    {% for item in departments %}
 
-                            </div>
+    <option value="{{ item.Id }}">
+
+        {{ item.Department }}
+
+    </option>
+
+    {% endfor %}
+
+</select>
+
+</div>
 
                         </div>
 
                         <div class="col-md-6">
 
-                            <div class="form-group">
+<div class="form-group">
 
-                                <label class="form-label">
-                                    Position
-                                </label>
+    <label class="form-label">
+        Position
+    </label>
 
-                                <input type="text"
-                                       name="position"
-                                       class="form-control"
-                                       placeholder="Software Engineer">
+<select class="form-control"
+        name="position"
+        id="position"
+        required>
+
+    <option value="">
+        Select Position
+    </option>
+
+</select>
+
+</div>
+
 
                             </div>
 
-                        </div>
 
                     </div>
 
@@ -713,5 +590,58 @@
     </div>
 
 </div>
+
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+
+$(document).on('change', '#department', function () {
+
+    var departmentId = $(this).val();
+
+    console.log("Department:", departmentId);
+
+    $.ajax({
+
+        url: '/get_positions/' + departmentId,
+
+        type: 'GET',
+
+        success: function (response) {
+
+            console.log(response);
+
+            var options =
+                '<option value="">Select Position</option>';
+
+            $.each(response, function (index, item) {
+
+                options +=
+                    '<option value="' + item.Id + '">' +
+                    item.Position +
+                    '</option>';
+
+            });
+
+            $('#position').html(options);
+
+        },
+
+        error: function (xhr) {
+
+            console.log(xhr);
+
+            alert('Unable to fetch positions');
+
+        }
+
+    });
+
+});
+
+</script>
 
 {% endblock %}

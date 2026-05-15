@@ -49,36 +49,41 @@
 
                             <th>#</th>
                             <th>Department Name</th>
-                            <th>Description</th>
-                            <th>Created Date</th>
                             <th>Actions</th>
 
                         </tr>
 
                     </thead>
 
-                    <tbody>
+<tbody>
 
-                        <tr>
+{% for item in departments %}
 
-                            <td>1</td>
-                            <td>IT</td>
-                            <td>Software Department</td>
-                            <td>15-05-2026</td>
+<tr>
 
-                            <td>
+    <td>
+        {{ item.Id }}
+    </td>
 
-                                <button class="btn btn-primary btn-sm">
+    <td>
+        {{ item.Department }}
+    </td>
 
-                                    <i class="fas fa-edit"></i>
+    <td>
 
-                                </button>
+        <button class="btn btn-primary btn-sm">
 
-                            </td>
+            <i class="fas fa-edit"></i>
 
-                        </tr>
+        </button>
 
-                    </tbody>
+    </td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
 
                 </table>
 
@@ -117,34 +122,23 @@
 
                 </div>
 
-                <div class="modal-body">
+<div class="modal-body">
 
-                    <div class="form-group">
+    <div class="form-group">
 
-                        <label>
-                            Department Name
-                        </label>
+        <label>
+            Department Name
+        </label>
 
-                        <input type="text"
-                               name="department_name"
-                               class="form-control"
-                               placeholder="Enter Department">
+        <input type="text"
+               name="department_name"
+               class="form-control"
+               placeholder="Enter Department"
+               required>
 
-                    </div>
+    </div>
 
-                    <div class="form-group">
-
-                        <label>
-                            Description
-                        </label>
-
-                        <textarea class="form-control"
-                                  name="description"
-                                  rows="3"></textarea>
-
-                    </div>
-
-                </div>
+</div>
 
                 <div class="modal-footer">
 
