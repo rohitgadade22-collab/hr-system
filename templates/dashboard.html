@@ -111,7 +111,7 @@
                     </div>
 
                     <div class="card-body">
-                        <canvas id="barChart"></canvas>
+                        <canvas id="barChart" style="height: 350px;"></canvas>
                     </div>
 
                 </div>
@@ -129,7 +129,7 @@
                     </div>
 
                     <div class="card-body">
-                        <canvas id="lineChart"></canvas>
+                        <canvas id="lineChart" style="height: 350px;"></canvas>
                     </div>
 
                 </div>
@@ -145,9 +145,13 @@
 <!-- Chart JS -->
 <script>
 
+document.addEventListener("DOMContentLoaded", function () {
+
     // Bar Chart
 
-    new Chart(document.getElementById('barChart'), {
+    const barCanvas = document.getElementById('barChart');
+
+    new Chart(barCanvas, {
 
         type: 'bar',
 
@@ -156,19 +160,57 @@
             labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
 
             datasets: [
+
                 {
                     label: 'Present',
-                    backgroundColor: '#17a2b8',
-                    data: [235, 238, 234, 240, 234]
+
+                    data: [235, 238, 234, 240, 234],
+
+                    backgroundColor: '#28a745'
+                },
+
+                {
+                    label: 'Absent',
+
+                    data: [13, 10, 14, 8, 14],
+
+                    backgroundColor: '#dc3545'
                 }
+
             ]
+        },
+
+        options: {
+
+            responsive: true,
+
+            maintainAspectRatio: false,
+
+            plugins: {
+
+                legend: {
+                    position: 'top'
+                }
+
+            },
+
+            scales: {
+
+                y: {
+                    beginAtZero: true
+                }
+
+            }
+
         }
 
     });
 
     // Line Chart
 
-    new Chart(document.getElementById('lineChart'), {
+    const lineCanvas = document.getElementById('lineChart');
+
+    new Chart(lineCanvas, {
 
         type: 'line',
 
@@ -177,16 +219,51 @@
             labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
 
             datasets: [
+
                 {
-                    label: 'Attendance',
-                    borderColor: '#dc3545',
+                    label: 'Attendance %',
+
                     data: [94, 93, 95, 94, 95],
-                    fill: false
+
+                    borderColor: '#007bff',
+
+                    backgroundColor: '#007bff',
+
+                    fill: false,
+
+                    tension: 0.4
                 }
+
             ]
+        },
+
+        options: {
+
+            responsive: true,
+
+            maintainAspectRatio: false,
+
+            plugins: {
+
+                legend: {
+                    position: 'top'
+                }
+
+            },
+
+            scales: {
+
+                y: {
+                    beginAtZero: false
+                }
+
+            }
+
         }
 
     });
+
+});
 
 </script>
 
