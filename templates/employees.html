@@ -233,12 +233,16 @@
                 <i class="fas fa-user"></i>
 
                 <div>
-                    <strong>Total Employees: 5</strong>
+                   <strong>
+    Total Employees: {{ total_employees }}
+</strong>
                 </div>
 
-                <div class="text-muted">
-                    Active: 4 | Inactive: 1
-                </div>
+<div class="text-muted">
+    Active: {{ active_employees }}
+    |
+    Inactive: {{ inactive_employees }}
+</div>
 
             </div>
 
@@ -272,7 +276,6 @@
 
                     <tr>
 
-                        <th>#</th>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Phone</th>
@@ -291,10 +294,6 @@
 {% for item in employees %}
 
 <tr>
-
-    <td>
-        {{ item.Id }}
-    </td>
 
     <td class="employee-name">
         {{ item.FirstName }} {{ item.LastName }}
@@ -328,23 +327,51 @@
 
     <td>
 
-        <span class="status-active">
+{% if item.Status == 1 %}
 
-            Active
+<span class="status-active">
 
-        </span>
+    Active
+
+</span>
+
+{% else %}
+
+<span class="status-inactive">
+
+    Inactive
+
+</span>
+
+{% endif %}
 
     </td>
 
+
+
     <td>
+<button class="btn btn-edit"
 
-        <button class="btn btn-edit">
+        data-toggle="modal"
+        data-target="#editEmployeeModal"
 
-            <i class="fas fa-edit mr-1"></i>
+        data-id="{{ item.Id }}"
+        data-firstname="{{ item.FirstName }}"
+        data-lastname="{{ item.LastName }}"
+        data-email="{{ item.Email }}"
+        data-empid="{{ item.EmployeeId }}"
+        data-phone="{{ item.Phone }}"
+        data-department="{{ item.DepartmentId }}"
+        data-position="{{ item.PositionId }}"
+        data-joiningdate="{{ item.JoiningDate }}"
+        data-address="{{ item.Address }}"
+        data-status="{{ item.Status }}">
 
-            Edit
+    <i class="fas fa-edit mr-1"></i>
 
-        </button>
+    Edit
+
+</button>
 
     </td>
 
@@ -359,6 +386,70 @@
         </div>
 
     </div>
+
+</div>
+
+<div class="d-flex justify-content-end mt-4">
+
+    <nav>
+
+        <ul class="pagination">
+
+            <!-- Previous -->
+
+            {% if page > 1 %}
+
+            <li class="page-item">
+
+                <a class="page-link"
+                   href="{{ url_for('employees', page=page-1) }}">
+
+                    Previous
+
+                </a>
+
+            </li>
+
+            {% endif %}
+
+            <!-- Page Numbers -->
+
+            {% for p in range(1, total_pages + 1) %}
+
+            <li class="page-item
+                       {% if p == page %}active{% endif %}">
+
+                <a class="page-link"
+                   href="{{ url_for('employees', page=p) }}">
+
+                    {{ p }}
+
+                </a>
+
+            </li>
+
+            {% endfor %}
+
+            <!-- Next -->
+
+            {% if page < total_pages %}
+
+            <li class="page-item">
+
+                <a class="page-link"
+                   href="{{ url_for('employees', page=page+1) }}">
+
+                    Next
+
+                </a>
+
+            </li>
+
+            {% endif %}
+
+        </ul>
+
+    </nav>
 
 </div>
 
@@ -591,6 +682,272 @@
 
 </div>
 
+<!-- ========================= -->
+<!-- Edit Employee Modal -->
+<!-- ========================= -->
+
+<div class="modal fade"
+     id="editEmployeeModal"
+     tabindex="-1">
+
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+
+        <div class="modal-content">
+
+            <form method="POST"
+                  action="/update_employee">
+
+                <!-- Header -->
+                <div class="modal-header">
+
+                    <h5 class="modal-title">
+                        Edit Employee
+                    </h5>
+
+                    <button type="button"
+                            class="close"
+                            data-dismiss="modal">
+
+                        <span>&times;</span>
+
+                    </button>
+
+                </div>
+
+                <!-- Body -->
+                <div class="modal-body">
+
+                    <!-- Hidden ID -->
+                    <input type="hidden"
+                           name="id"
+                           id="edit_id">
+
+                    <!-- Row 1 -->
+                    <div class="row">
+
+                        <!-- First Name -->
+                        <div class="col-md-6">
+
+                            <div class="form-group">
+
+                                <label>
+                                    First Name
+                                </label>
+
+                                <input type="text"
+                                       name="first_name"
+                                       id="edit_first_name"
+                                       class="form-control">
+
+                            </div>
+
+                        </div>
+
+                        <!-- Last Name -->
+                        <div class="col-md-6">
+
+                            <div class="form-group">
+
+                                <label>
+                                    Last Name
+                                </label>
+
+                                <input type="text"
+                                       name="last_name"
+                                       id="edit_last_name"
+                                       class="form-control">
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Email -->
+                    <div class="form-group">
+
+                        <label>
+                            Email
+                        </label>
+
+                        <input type="email"
+                               name="email"
+                               id="edit_email"
+                               class="form-control">
+
+                    </div>
+
+                    <!-- Employee ID -->
+                    <div class="form-group">
+
+                        <label>
+                            Employee ID
+                        </label>
+
+                        <input type="text"
+                               id="edit_empid"
+                               class="form-control"
+                               readonly>
+
+                    </div>
+
+                    <!-- Phone -->
+                    <div class="form-group">
+
+                        <label>
+                            Phone
+                        </label>
+
+                        <input type="text"
+                               name="phone"
+                               id="edit_phone"
+                               class="form-control">
+
+                    </div>
+
+                    <!-- Row 2 -->
+                    <div class="row">
+
+                        <!-- Department -->
+                        <div class="col-md-6">
+
+                            <div class="form-group">
+
+                                <label>
+                                    Department
+                                </label>
+
+                                <select class="form-control"
+                                        name="department"
+                                        id="edit_department">
+
+                                    {% for item in departments %}
+
+                                    <option value="{{ item.Id }}">
+
+                                        {{ item.Department }}
+
+                                    </option>
+
+                                    {% endfor %}
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                        <!-- Position -->
+                        <div class="col-md-6">
+
+                            <div class="form-group">
+
+                                <label>
+                                    Position
+                                </label>
+
+                                <select class="form-control"
+                                        name="position"
+                                        id="edit_position">
+
+                                    {% for item in positions %}
+
+                                    <option value="{{ item.Id }}">
+
+                                        {{ item.Position }}
+
+                                    </option>
+
+                                    {% endfor %}
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Joining Date -->
+                    <div class="form-group">
+
+                        <label>
+                            Joining Date
+                        </label>
+
+                        <input type="date"
+                               name="joining_date"
+                               id="edit_joining_date"
+                               class="form-control">
+
+                    </div>
+
+                    <!-- Address -->
+                    <div class="form-group">
+
+                        <label>
+                            Address
+                        </label>
+
+                        <textarea class="form-control"
+                                  name="address"
+                                  id="edit_address"></textarea>
+
+                    </div>
+
+                    <!-- Status -->
+                    <div class="form-group">
+
+                        <label>
+                            Status
+                        </label>
+
+                        <select class="form-control"
+                                name="status"
+                                id="edit_status">
+
+                            <option value="1">
+                                Active
+                            </option>
+
+                            <option value="0">
+                                Inactive
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <!-- Footer -->
+                <div class="modal-footer">
+
+                    <button type="button"
+                            class="btn btn-secondary"
+                            data-dismiss="modal">
+
+                        Cancel
+
+                    </button>
+
+                    <button type="submit"
+                            class="btn btn-primary">
+
+                        Update Employee
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
 
 {% endblock %}
 
@@ -602,7 +959,7 @@ $(document).on('change', '#department', function () {
 
     var departmentId = $(this).val();
 
-    console.log("Department:", departmentId);
+    //console.log("Department:", departmentId);
 
     $.ajax({
 
@@ -612,7 +969,7 @@ $(document).on('change', '#department', function () {
 
         success: function (response) {
 
-            console.log(response);
+            //console.log(response);
 
             var options =
                 '<option value="">Select Position</option>';
@@ -634,11 +991,68 @@ $(document).on('change', '#department', function () {
 
             console.log(xhr);
 
-            alert('Unable to fetch positions');
+            //alert('Unable to fetch positions');
 
         }
 
     });
+
+});
+
+</script>
+<!-- ========================= -->
+<!-- Edit Modal Script -->
+<!-- ========================= -->
+
+<script>
+
+$('#editEmployeeModal').on('show.bs.modal', function (event) {
+
+    var button = $(event.relatedTarget);
+
+    $('#edit_id').val(
+        button.data('id')
+    );
+
+    $('#edit_first_name').val(
+        button.data('firstname')
+    );
+
+    $('#edit_last_name').val(
+        button.data('lastname')
+    );
+
+    $('#edit_email').val(
+        button.data('email')
+    );
+
+    $('#edit_empid').val(
+        button.data('empid')
+    );
+
+    $('#edit_phone').val(
+        button.data('phone')
+    );
+
+    $('#edit_department').val(
+        button.data('department')
+    );
+
+    $('#edit_position').val(
+        button.data('position')
+    );
+
+    $('#edit_joining_date').val(
+        button.data('joiningdate')
+    );
+
+    $('#edit_address').val(
+        button.data('address')
+    );
+
+    $('#edit_status').val(
+        button.data('status')
+    );
 
 });
 

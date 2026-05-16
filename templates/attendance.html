@@ -42,7 +42,7 @@
 
                     <div class="inner">
 
-                        <h3>4</h3>
+                        <h3>{{ present_count }}</h3>
 
                         <p>Present</p>
 
@@ -63,7 +63,7 @@
 
                     <div class="inner">
 
-                        <h3>1</h3>
+                        <h3>{{ absent_count }}</h3>
 
                         <p>Absent</p>
 
@@ -84,7 +84,7 @@
 
                     <div class="inner">
 
-                        <h3>1</h3>
+                       <h3>{{ pending_count }}</h3>
 
                         <p>Pending</p>
 
@@ -142,120 +142,138 @@
 
                     <tbody>
 
-                    <!-- Row 1 -->
-                    <tr>
+{% for item in attendance %}
 
-                        <td>John Doe</td>
-                        <td>Engineering</td>
-                        <td>09:00 AM</td>
-                        <td>Not Marked</td>
+<tr>
 
-                        <td>
-                            <span class="badge badge-success">
-                                Present
-                            </span>
-                        </td>
+    <td>
+        {{ item.EmployeeName }}
+    </td>
 
-                        <td>
+    <td>
+        {{ item.Department }}
+    </td>
 
-                            <!-- Check Out -->
-                            <button class="btn btn-primary btn-sm"
-                                    onclick="openModal('Check Out')">
+    <td>
 
-                                Check Out
+        {% if item.CheckInTime %}
 
-                            </button>
+            {{ item.CheckInTime }}
 
-                        </td>
+        {% else %}
 
-                    </tr>
+            Not Marked
 
-                    <!-- Row 2 -->
-                    <tr>
+        {% endif %}
 
-                        <td>Jane Smith</td>
-                        <td>Marketing</td>
-                        <td>08:45 AM</td>
-                        <td>05:30 PM</td>
+    </td>
 
-                        <td>
-                            <span class="badge badge-success">
-                                Present
-                            </span>
-                        </td>
+    <td>
 
-                        <td>
+        {% if item.CheckOutTime %}
 
-                            <button class="btn btn-secondary btn-sm">
-                                Completed
-                            </button>
+            {{ item.CheckOutTime }}
 
-                        </td>
+        {% else %}
 
-                    </tr>
+            Not Marked
 
-                    <!-- Row 3 -->
-                    <tr>
+        {% endif %}
 
-                        <td>Mike Johnson</td>
-                        <td>Sales</td>
-                        <td>Not Marked</td>
-                        <td>Not Marked</td>
+    </td>
 
-                        <td>
-                            <span class="badge badge-warning">
-                                Pending
-                            </span>
-                        </td>
+    <td>
 
-                        <td>
+        {% if item.Status == 'Present' %}
 
-                            <!-- Check In -->
-                            <button type="button"
-        class="btn btn-success btn-sm"
-        onclick="openModal('Check In', 'Mike Johnson')">
+            <span class="badge badge-success">
+                Present
+            </span>
 
-    Check In
+        {% elif item.Status == 'Absent' %}
 
-</button>
+            <span class="badge badge-danger">
+                Absent
+            </span>
 
-                            <!-- Mark Absent -->
-                            <button class="btn btn-danger btn-sm">
-                                Mark Absent
-                            </button>
+        {% elif item.Status == 'Completed' %}
 
-                        </td>
+            <span class="badge badge-secondary">
+                Completed
+            </span>
 
-                    </tr>
+        {% else %}
 
-                    <!-- Row 4 -->
-                    <tr>
+            <span class="badge badge-warning">
+                Pending
+            </span>
 
-                        <td>Sarah Williams</td>
-                        <td>HR</td>
-                        <td>09:15 AM</td>
-                        <td>Not Marked</td>
+        {% endif %}
 
-                        <td>
-                            <span class="badge badge-success">
-                                Present
-                            </span>
-                        </td>
+    </td>
 
-                        <td>
-<button type="button"
-        class="btn btn-primary btn-sm"
-        onclick="openModal('Check Out', 'John Doe')">
+<td>
 
-    Check Out
+    {% if item.Status == 'Pending' %}
 
-</button>
+        <!-- Check In -->
 
-                        </td>
+        <button type="button"
+                class="btn btn-success btn-sm"
 
-                    </tr>
+                onclick="openModal(
+                    'Check In',
+                    '{{ item.EmployeeName }}',
+                    '{{ item.Id }}'
+                )">
 
-                    </tbody>
+            Check In
+
+        </button>
+
+        <!-- Mark Absent -->
+
+        <button type="button"
+                class="btn btn-danger btn-sm">
+
+            Mark Absent
+
+        </button>
+
+    {% elif item.Status == 'Present' %}
+
+        <!-- Check Out -->
+
+        <button type="button"
+                class="btn btn-primary btn-sm"
+
+                onclick="openModal(
+                    'Check Out',
+                    '{{ item.EmployeeName }}',
+                    '{{ item.Id }}'
+                )">
+
+            Check Out
+
+        </button>
+
+    {% else %}
+
+        <button class="btn btn-secondary btn-sm">
+
+            Completed
+
+        </button>
+
+    {% endif %}
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
 
                 </table>
 
@@ -370,7 +388,7 @@
 <!-- Script -->
 <script>
 
-function openModal(action, employeeName) {
+function openModal(action, employeeName, employeeId) {
 
     // Title
 
